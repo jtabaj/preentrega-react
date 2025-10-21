@@ -4,7 +4,7 @@ import { Card, Button, Spinner, Container, Row, Col, Alert } from "react-bootstr
 import MiBoton from "../components/MiBoton";
 import { useAppContext } from "../context/AppContext";
 
-const ProductosAnt = () => {
+const Productos = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -149,4 +149,4 @@ const ProductosAnt = () => {
   );
 };
 
-export default ProductosAnt;
+export default Productos;

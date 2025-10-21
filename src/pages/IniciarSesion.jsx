@@ -20,7 +20,7 @@ export default function IniciarSesion() {
       if (ubicacion.state?.carrito) {
         navigate("/pagar", { state: { carrito: ubicacion.state.carrito } });
       } else {
-        navigate("/productosAnt");
+        navigate("/productos");
       }
     } else {
       alert("Completa todos los datos");
