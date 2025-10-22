@@ -48,7 +48,7 @@ const Productos = () => {
   // Guardar posición de scroll antes de navegar
   const handleVerDetalle = (producto) => {
     sessionStorage.setItem("scrollPos", window.scrollY); 
-    navigate(`/producto/${producto.id}`, { state: { producto } });
+    navigate(`/producto/${producto.id}`);
   };
 
   // 🌀 Loading
@@ -77,7 +77,7 @@ const Productos = () => {
         backgroundColor: "#001f3f", 
         minHeight: "100vh", 
         padding: "2rem 1rem",
-        paddingBottom: "5rem" // 👈 ESPACIO INFERIOR AÑADIDO PARA EL FOOTER
+        paddingBottom: "5rem"
       }}
     >
       <Container>
@@ -138,7 +138,6 @@ const Productos = () => {
         </Row>
       </Container>
 
-      {/* Estilos CSS para la animación fadeIn */}
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }

@@ -16,15 +16,22 @@ export function AppProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
   
   // Funciones para el carrito
-  const agregarCarrito = (x) => {
-    if (carrito.find((item) => item.id === x.id)) {
-      x.cantidad++;
-      setCarrito([...carrito]);
-      return;
+const agregarCarrito = (producto) => {
+  setCarrito((prevCarrito) => {
+    const existente = prevCarrito.find((item) => item.id === producto.id);
+    if (existente) {
+      // Si ya existe, sumamos cantidad
+      return prevCarrito.map((item) =>
+        item.id === producto.id
+          ? { ...item, cantidad: item.cantidad + 1 }
+          : item
+      );
+    } else {
+      // Si no existe, lo agregamos con cantidad 1
+      return [...prevCarrito, { ...producto, cantidad: 1 }];
     }
-    x.cantidad = 1;
-    setCarrito([...carrito, x]);
-  };
+  });
+};
 
   const agregarUnidad = (id) => {
     const item = carrito.find((item) => item.id === id);
