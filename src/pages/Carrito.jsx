@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import MiBoton from "../components/MiBoton.jsx";
 
@@ -12,7 +12,7 @@ function Carrito() {
     agregarUnidad,
     eliminarUnidad,
     formatJT,
-  } = useAppContext();
+  } = useCartContext();
 
   const total = carrito.reduce(
     (acc, item) => acc + item.precio * item.cantidad,

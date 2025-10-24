@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button, Spinner, Container, Row, Col, Alert } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { agregarCarrito, formatJT } = useAppContext();
+  const { agregarCarrito, formatJT } = useCartContext();
 
   // Cargar productos desde la API
   useEffect(() => {

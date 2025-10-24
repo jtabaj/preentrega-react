@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 function Producto() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { formatJT } = useAppContext();
+  const { formatJT } = useCartContext();
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

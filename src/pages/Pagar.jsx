@@ -1,10 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useNavigate }    from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
+import { useUserContext } from "../context/UserContext";
 import { Table, Button, Container, Row, Col, Card } from "react-bootstrap";
-import MiBoton from "../components/MiBoton";
+import MiBoton            from "../components/MiBoton";
 
 export default function Pagar() {
-  const { usuario, cerrarSesion, carrito, vaciarCarrito, formatJT } = useAppContext();
+  const { carrito, vaciarCarrito, formatJT } = useCartContext();
+  const { usuario, cerrarSesion }            = useUserContext();
   const navigate = useNavigate();
 
   // Calculo del total

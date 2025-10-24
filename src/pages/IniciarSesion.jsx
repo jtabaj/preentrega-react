@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useUserContext } from "../context/UserContext";
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
 
 export default function IniciarSesion() {
   const navigate = useNavigate();
   const ubicacion = useLocation();
-  const { setIsAuthenticated, setUsuario, usuario, cerrarSesion } = useAppContext();
+  const { setIsAuthenticated, setUsuario, usuario, cerrarSesion } = useUserContext();
 
   const [formulario, setFormulario] = useState({ nombre: "", email: "" });
 
