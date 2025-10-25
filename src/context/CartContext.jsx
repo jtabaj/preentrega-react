@@ -10,6 +10,9 @@ export function CartProvider({ children }) {
   // Estado del carrito
   const [carrito, setCarrito] = useState([]);
   
+  // Cantidad total de productos en el carrito
+  const qProds = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
   // Funciones para el carrito
 const agregarCarrito = (producto) => {
   setCarrito((prevCarrito) => {
@@ -67,6 +70,7 @@ const agregarCarrito = (producto) => {
     agregarCarrito,
     agregarUnidad,
     eliminarUnidad,
+    qProds,
     // Formateo de Nros
     formatJT
   };

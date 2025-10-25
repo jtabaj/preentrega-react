@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { FaHome, FaShoppingCart, FaServicestack, FaBoxOpen } from 'react-icons/fa';
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
+import { useUserContext } from "../context/UserContext";
 
 const Header = () => {
-  const { carrito, usuario } = useAppContext();
-  const qProds = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+  const { qProds } = useCartContext();
+  const { usuario } = useUserContext();
+  
 
   // 1. Estado para controlar si el menú está expandido o no
   const [expanded, setExpanded] = useState(false);

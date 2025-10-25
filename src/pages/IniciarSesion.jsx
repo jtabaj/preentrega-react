@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { useCartContext } from "../context/CartContext";
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
 
@@ -8,6 +9,7 @@ export default function IniciarSesion() {
   const navigate = useNavigate();
   const ubicacion = useLocation();
   const { setIsAuthenticated, setUsuario, usuario, cerrarSesion } = useUserContext();
+  const { vaciarCarrito} = useCartContext();
 
   const [formulario, setFormulario] = useState({ nombre: "", email: "" });
 
@@ -27,6 +29,12 @@ export default function IniciarSesion() {
     }
   };
 
+  const manejarCierrarSesion = () => {
+    cerrarSesion();
+    setFormulario({ nombre: "", email: "" });
+    vaciarCarrito();
+  };
+
   return (
     <Container className="d-flex justify-content-center pt-5 vh-100">
       <Row className="w-100">
@@ -43,7 +51,7 @@ export default function IniciarSesion() {
                   <MiBoton
                     texto="Cerrar sesión"
                     fondo="outline-danger"
-                    funcAlClickear={cerrarSesion}
+                    funcAlClickear={manejarCierrarSesion}
                   />
                 </div>
               )}
