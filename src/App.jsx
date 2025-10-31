@@ -13,7 +13,6 @@ import RutaProtegida from "./pages/RutaProtegida";
 import Pagar from "./pages/Pagar";
 import IniciarSesion from "./pages/IniciarSesion";
 
-
 function App() {
   return (
     <>
@@ -23,23 +22,17 @@ function App() {
           <div className="container mt-4">
             <p>Bienvenido a nuestra aplicación</p>
             <Routes>
-              <Route path="/" element={<Inicio />} />
-              <Route path="/servicios" element={<Servicios />} />
-              <Route path="/productos" element={<Productos />} />
-              <Route path="/producto/:id" element={<Producto />} />
-              <Route path="/carrito" element={<Carrito />} />
+              <Route path="/"               element={<Inicio />} />
+              <Route path="/servicios"      element={<Servicios />} />
+              <Route path="/productos"      element={<Productos />} />
+              <Route path="/producto/:id"   element={<Producto />} />
+              <Route path="/carrito"        element={<Carrito />} />
               <Route path="/iniciar-sesion" element={<IniciarSesion />} />
-              <Route
-                path="/pagar"
-                element={
-                  <RutaProtegida>
-                    <Pagar />
-                  </RutaProtegida>
-                }
-              />
+              <Route path="/pagar"          element={<RutaProtegida>
+                                                        <Pagar />
+                                                     </RutaProtegida>} />
             </Routes>
           </div>
-
           <Footer />
         </UserProvider>
       </CartProvider>

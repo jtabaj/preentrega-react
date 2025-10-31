@@ -6,18 +6,17 @@ import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
 
 export default function IniciarSesion() {
-  const navigate = useNavigate();
-  const ubicacion = useLocation();
-  const { setIsAuthenticated, setUsuario, usuario, cerrarSesion } = useUserContext();
-  const { vaciarCarrito} = useCartContext();
+  const navigate                                        = useNavigate();
+  const ubicacion                                       = useLocation();
+  const { iniciarSesionUsuario, usuario, cerrarSesion } = useUserContext();
+  const { vaciarCarrito}                               = useCartContext();
 
   const [formulario, setFormulario] = useState({ nombre: "", email: "" });
 
   const manejarEnvio = (e) => {
     e.preventDefault();
     if (formulario.nombre && formulario.email) {
-      setIsAuthenticated(true);
-      setUsuario(formulario);
+      iniciarSesionUsuario(formulario.nombre, formulario.email);
 
       if (ubicacion.state?.carrito) {
         navigate("/pagar", { state: { carrito: ubicacion.state.carrito } });

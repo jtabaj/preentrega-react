@@ -60,10 +60,8 @@ const agregarCarrito = (producto) => {
 
   const formatJT = (num) => num.toLocaleString("es-AR", {minimumFractionDigits: 2, maximumFractionDigits: 2,});
 
-
   // Valor que se provee a todos los componentes
   const value = {    
-    // Carrito state y funciones
     carrito,
     vaciarCarrito,
     eliminarCarrito,

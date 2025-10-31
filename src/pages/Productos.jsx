@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, Button, Spinner, Container, Row, Col, Alert } from "react-bootstrap";
 import MiBoton from "../components/MiBoton";
 import { useCartContext } from "../context/CartContext";
+import { FaCartShopping, FaEye, FaEyeLowVision, FaKey, FaRegEye } from "react-icons/fa6";
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
@@ -118,15 +119,17 @@ const Productos = () => {
                   </Card.Text>
 
                   <div className="d-flex justify-content-center gap-2">
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() => handleVerDetalle(p)}
-                    >
-                      Ver detalle
-                    </Button>
+
+                    <MiBoton 
+                      icono={<FaEye/>} 
+                      texto="ver detalle"
+                      fondo="primary"
+                      funcAlClickear={() => handleVerDetalle(p)}
+                     />
+
                     <MiBoton
-                      texto="🛒 Agregar"
+                      icono={<FaCartShopping />}
+                      texto={"Agregar"}
                       fondo="success"
                       funcAlClickear={() => agregarCarrito(p)}
                     />

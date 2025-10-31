@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAppContext } from '../context/BORRARAppContext';
+// import { useAppContext } from '../context/BORRARAppContext';
 
 function RutaProtegida({ children }) {
    const {isAuthenticated} = useAppContext();

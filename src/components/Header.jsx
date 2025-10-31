@@ -64,22 +64,18 @@ const Header = () => {
       <Container>
         {/* Logo + Nombre */}
         <Navbar.Brand 
-          as={Link} 
-          to="/" 
-          onClick={handleLinkClick}
+          as={Link} to="/" onClick={handleLinkClick}
         >
-          <img
+        <img
             src="/vite.svg"
             alt="Logo"
             width={30}
             height={30}
             className="me-2"
-          />
+        />
           Mi Tienda
         </Navbar.Brand>
         
-
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="ms-auto" />
         
         <Navbar.Collapse id="basic-navbar-nav" className="order-lg-2"> {/* order-lg-2 lo pone en el centro en desktop */}
@@ -109,6 +105,7 @@ const Header = () => {
             </Button>
           </Nav>
         </Navbar.Collapse>
+        
         {/*  EL BOTÓN FUERA DEL COLLAPSE */}
         {qProds > 0 &&
         <Nav className="d-flex order-lg-3"> {/* order-lg-3 lo pone al final en desktop */}

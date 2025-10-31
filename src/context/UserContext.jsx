@@ -8,8 +8,13 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
   // Estado de autenticación
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [usuario, setUsuario] = useState({ nombre: "", email: "" });
+  const [usuario, setUsuario]                 = useState({ nombre: "", email: "" });
 
+  const iniciarSesionUsuario = (nombre, email) => {
+    setIsAuthenticated(true);
+    setUsuario({ nombre, email });
+  };
+  
   // Función para cerrar sesión
   const cerrarSesion = () => {
     setIsAuthenticated(false);
@@ -21,9 +26,10 @@ export function UserProvider({ children }) {
   const value = {
     // Autenticación
     isAuthenticated,
-    setIsAuthenticated,
     usuario,
-    setUsuario,
+    //setIsAuthenticated,
+    //setUsuario,
+    iniciarSesionUsuario,
     cerrarSesion,
   };
 
