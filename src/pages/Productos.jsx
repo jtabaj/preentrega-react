@@ -4,6 +4,7 @@ import { Card, Button, Spinner, Container, Row, Col, Alert } from "react-bootstr
 import MiBoton from "../components/MiBoton";
 import { useCartContext } from "../context/CartContext";
 import { FaCartShopping, FaEye, FaEyeLowVision, FaKey, FaRegEye } from "react-icons/fa6";
+import { useUserContext } from "../context/UserContext";
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
@@ -11,12 +12,13 @@ const Productos = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { agregarCarrito, formatJT } = useCartContext();
+  const { esAdmin } = useUserContext();
 
   // Cargar productos desde la API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("https://68d99d6890a75154f0dac9e3.mockapi.io/tienda/prductos/");
+        const res = await fetch("https://68d99d6890a75154f0dac9e3.mockapi.io/tienda/productos/");
         if (!res.ok) {
           throw new Error("Error al obtener productos");
         }
@@ -61,6 +63,19 @@ const Productos = () => {
       </div>
     );
 
+
+  const handleEliminar = (producto) => {
+    // Navegar a la página de confirmación de eliminación
+    navigate('/eliminar-producto', { state: { producto } });
+  };
+
+  const handleEditar = (producto) => {
+    // Navegar al formulario de edición
+    navigate('/actualizar-producto', { state: { producto } });
+  };
+
+
+
   // ⚠️ Error
   if (error)
     return (
@@ -88,29 +103,25 @@ const Productos = () => {
           {products.map((p, index) => (
             <Col
               key={p.id}
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              style={{
-                animation: `fadeIn 0.5s ease ${index * 0.1}s forwards`,
+              xs={12} sm={6} md={4} lg={3}
+              style={{animation: `fadeIn 0.5s ease ${index * 0.1}s forwards`,
                 opacity: 0,
               }}
             >
               <Card className="h-100 shadow-sm border-0">
                 <Card.Img
                   variant="top"
-                  src={p.avatar}
-                  alt={p.producto}
+                  src={p.avatar || "default-image-url.jpg"} alt={p.producto}
                   style={{
-                    objectFit: "cover",
-                    height: "200px",
-                    borderTopLeftRadius: "0.5rem",
-                    borderTopRightRadius: "0.5rem",
+                    objectFit: "cover", height: "200px",
+                    borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem",
                   }}
                 />
                 <Card.Body>
                   <Card.Title className="text-center">{p.producto}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted text-center">
+                    Categoría: {p.categoria}
+                  </Card.Subtitle>
                   <Card.Text className="text-muted" style={{ minHeight: "3rem" }}>
                     {p.descripcion || "Sin descripción disponible."}
                   </Card.Text>
@@ -122,18 +133,38 @@ const Productos = () => {
 
                     <MiBoton 
                       icono={<FaEye/>} 
-                      texto="ver detalle"
-                      fondo="primary"
+                      texto="ver detalle" fondo="primary"
                       funcAlClickear={() => handleVerDetalle(p)}
                      />
 
                     <MiBoton
                       icono={<FaCartShopping />}
-                      texto={"Agregar"}
-                      fondo="success"
+                      texto={"Agregar"}  fondo="success"
                       funcAlClickear={() => agregarCarrito(p)}
                     />
                   </div>
+
+                   {/* Botones de admin */}
+                    {esAdmin && (
+                      <div className="mt-3 pt-3 border-top">
+                        <div className="d-flex gap-2">
+                          <MiBoton
+                            funcAlClickear={() => handleEditar(p)}
+                            texto={"Editar"}
+                            fondo="warning btn-sm flex-fill"
+                            >
+                          </MiBoton>
+                          <MiBoton
+                            funcAlClickear={() => handleEliminar(p)}
+                            texto={"Eliminar"}
+                            fondo="danger btn-sm flex-fill"
+                          >
+                          </MiBoton>
+                        </div>
+                      </div>
+                    )}
+
+
                 </Card.Body>
               </Card>
             </Col>

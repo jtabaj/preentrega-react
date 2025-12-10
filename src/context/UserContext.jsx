@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useNavigate} from "react-router-dom";
 
 // Crear el contexto
 // eslint-disable-next-line react-refresh/only-export-components
@@ -9,17 +10,29 @@ export function UserProvider({ children }) {
   // Estado de autenticación
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [usuario, setUsuario]                 = useState({ nombre: "", email: "" });
+  const navigate = useNavigate();
 
-  const iniciarSesionUsuario = (nombre, email) => {
+  const iniciarSesion = (nombre) => {
     setIsAuthenticated(true);
-    setUsuario({ nombre, email });
+     const token = `fake-token-${nombre}`;
+    localStorage.setItem("authToken", token);
+
+    const emailGuardado = localStorage.getItem("authEmail");
+    const nombreGuardado = localStorage.getItem("authNombre");
+    setUsuario({
+      nombre: nombreGuardado,
+      email: emailGuardado || "",
+    });
   };
   
   // Función para cerrar sesión
   const cerrarSesion = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("authEmail");
+    localStorage.removeItem("authNombre");
     setUsuario({ nombre: "", email: "" });
-    // vaciarCarrito(); 
+    navigate("/productos");
   };
 
   // Valor que se provee a todos los componentes
@@ -27,9 +40,8 @@ export function UserProvider({ children }) {
     // Autenticación
     isAuthenticated,
     usuario,
-    //setIsAuthenticated,
-    //setUsuario,
-    iniciarSesionUsuario,
+    esAdmin: usuario?.nombre === 'admin',
+    iniciarSesion,
     cerrarSesion,
   };
 
